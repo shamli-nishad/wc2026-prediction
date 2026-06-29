@@ -321,7 +321,7 @@ function BracketImage({ picks, userName, predictedOn }: { picks: Picks; userName
       })}
 
       <div style={{ marginTop: 8, textAlign: 'center', fontSize: 9, color: '#1e2a3a' }}>
-        Created by: Shamli 
+        Built by: Shamli 
       </div>
     </div>
   );
