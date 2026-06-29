@@ -265,9 +265,11 @@ function BracketImage({ picks, userName, predictedOn }: { picks: Picks; userName
 
       {/* Round sections with matchup pairs */}
       {sections.map(({ label, matchups }) => {
-        const rows: [Team | null, Team | null][][] = [];
-        for (let i = 0; i < matchups.length; i += 2) rows.push(matchups.slice(i, i + 2) as [Team | null, Team | null][]);
-
+        // const rows: [Team | null, Team | null][][] = [];
+        // for (let i = 0; i < matchups.length; i += 2) rows.push(matchups.slice(i, i + 2) as [Team | null, Team | null][]);
+        type Matchup = { a: Team | null; b: Team | null; winner: Team | null };
+        const rows: Matchup[][] = [];
+        for (let i = 0; i < matchups.length; i += 2) rows.push(matchups.slice(i, i + 2));
         return (
           <div key={label} style={{ marginBottom: 14 }}>
             <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', color: '#475569', marginBottom: 8 }}>
