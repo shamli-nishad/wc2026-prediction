@@ -55,7 +55,7 @@ function NameGate({ onStart }: { onStart: (name: string) => void }) {
       <div style={{ width: '100%', maxWidth: 400, textAlign: 'center' }}>
         <div style={{ fontSize: 52, marginBottom: 12 }}>🏆</div>
         <h1 style={{ fontSize: 24, fontWeight: 800, color: C.gold, marginBottom: 6 }}>FIFA World Cup 2026</h1>
-        <p style={{ fontSize: 14, color: C.muted, marginBottom: 32 }}>Bracket Predictor — your predictions, your name on the card</p>
+        <p style={{ fontSize: 14, color: C.muted, marginBottom: 32 }}>Predict and share with your friends!</p>
 
         <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           <div>
