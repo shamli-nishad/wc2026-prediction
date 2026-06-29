@@ -248,7 +248,7 @@ function BracketImage({ picks, userName, predictedOn }: { picks: Picks; userName
     }}>
       {/* Header */}
       <div style={{ marginBottom: 12, paddingBottom: 10, borderBottom: `1px solid ${C.border}` }}>
-        <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: 2, color: C.muted, textTransform: 'uppercase', marginBottom: 4 }}>FIFA World Cup 2026 · Prediction</div>
+        <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: 2, color: C.muted, textTransform: 'uppercase', marginBottom: 4 }}>World Cup 2026 · Prediction</div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
           <div style={{ fontSize: 20, fontWeight: 800, color: C.gold }}>{userName}</div>
           <div style={{
