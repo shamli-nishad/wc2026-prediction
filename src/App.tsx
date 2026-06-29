@@ -190,14 +190,14 @@ function BracketImage({ picks, userName, predictedOn }: { picks: Picks; userName
   function TeamEntry({ team, isWinner }: { team: Team | null; isWinner: boolean }) {
     return (
       <div style={{
-        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3,
-        flex: 1, padding: '8px 4px',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        flex: 1, padding: '5px 4px',
         background: isWinner ? '#0d2b18' : 'transparent',
         borderRadius: 6,
       }}>
         <span style={{
           fontSize: 11, fontWeight: isWinner ? 800 : 600,
-          textAlign: 'center', wordBreak: 'break-word', lineHeight: 1.3,
+          textAlign: 'center', wordBreak: 'break-word', lineHeight: 1.2,
           color: isWinner ? '#86efac' : team ? C.text : C.dim,
         }}>
           {team?.name ?? 'TBD'}
@@ -242,63 +242,59 @@ function BracketImage({ picks, userName, predictedOn }: { picks: Picks; userName
 
   return (
     <div style={{
-      background: C.bg, padding: 20, borderRadius: 16,
+      background: C.bg, padding: '16px 16px 12px', borderRadius: 16,
       width: '100%', maxWidth: 560, fontFamily: 'Inter, sans-serif',
       boxSizing: 'border-box',
     }}>
       {/* Header */}
-      <div style={{ marginBottom: 18, paddingBottom: 14, borderBottom: `1px solid ${C.border}` }}>
-        <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: 2, color: C.muted, textTransform: 'uppercase', marginBottom: 6 }}>FIFA World Cup 2026 · Prediction</div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 12 }}>
-          <div style={{ fontSize: 22, fontWeight: 800, color: C.gold }}>{userName}</div>
+      <div style={{ marginBottom: 12, paddingBottom: 10, borderBottom: `1px solid ${C.border}` }}>
+        <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: 2, color: C.muted, textTransform: 'uppercase', marginBottom: 4 }}>FIFA World Cup 2026 · Prediction</div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
+          <div style={{ fontSize: 20, fontWeight: 800, color: C.gold }}>{userName}</div>
           <div style={{
             display: 'flex', flexDirection: 'column', alignItems: 'flex-end', flexShrink: 0,
             background: '#1a2236', border: `1px solid ${C.border}`,
-            borderRadius: 8, padding: '5px 10px',
+            borderRadius: 6, padding: '4px 8px',
           }}>
-            <div style={{ fontSize: 8, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', color: C.muted, marginBottom: 2 }}>Predicted on</div>
-            <div style={{ fontSize: 13, fontWeight: 700, color: C.text, whiteSpace: 'nowrap' }}>{predictedOn}</div>
+            <div style={{ fontSize: 7, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', color: C.muted, marginBottom: 1 }}>Predicted on</div>
+            <div style={{ fontSize: 12, fontWeight: 700, color: C.text, whiteSpace: 'nowrap' }}>{predictedOn}</div>
           </div>
         </div>
       </div>
 
-      {/* Round sections with matchup pairs */}
       {/* Champion */}
-      <div style={{ marginBottom: 14 }}>
-        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', color: C.gold, marginBottom: 8 }}>
+      <div style={{ marginBottom: 10 }}>
+        <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', color: C.gold, marginBottom: 5 }}>
           🏆 World Champion
         </div>
         {champion ? (
           <div style={{
-            display: 'flex', alignItems: 'center', gap: 14,
+            display: 'flex', alignItems: 'center', gap: 10,
             background: 'linear-gradient(135deg,#78350f,#b45309,#d97706)',
-            borderRadius: 12, padding: '14px 18px',
+            borderRadius: 10, padding: '8px 14px',
             border: '2px solid #f59e0b',
           }}>
-            <div>
-              {/* <div style={{ fontSize: 10, fontWeight: 700, color: '#fde68a', letterSpacing: 2, textTransform: 'uppercase' }}>World Champion</div> */}
-              <div style={{ fontSize: 22, fontWeight: 800, color: '#fff' }}>{champion.name}</div>
-            </div>
-            <span style={{ fontSize: 32, marginLeft: 'auto' }}>🏆</span>
+            <div style={{ fontSize: 18, fontWeight: 800, color: '#fff' }}>{champion.name}</div>
+            <span style={{ fontSize: 22, marginLeft: 'auto' }}>🏆</span>
           </div>
         ) : (
-          <div style={{ background: '#0d1321', borderRadius: 10, padding: 20, textAlign: 'center', color: C.dim, fontSize: 13 }}>
+          <div style={{ background: '#0d1321', borderRadius: 8, padding: '10px 14px', textAlign: 'center', color: C.dim, fontSize: 12 }}>
             Complete all picks to reveal your champion
           </div>
         )}
       </div>
 
       {/* The Final */}
-      <div style={{ marginBottom: 14 }}>
-        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', color: '#7c3aed', marginBottom: 8 }}>
+      <div style={{ marginBottom: 10 }}>
+        <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', color: '#7c3aed', marginBottom: 5 }}>
           The Final
         </div>
         <div style={{
           display: 'flex', background: '#1a1040', border: `1px solid ${champion ? '#22c55e44' : '#7c3aed55'}`,
-          borderRadius: 10, overflow: 'hidden',
+          borderRadius: 8, overflow: 'hidden',
         }}>
           <TeamEntry team={finalist0} isWinner={!!champion && !!finalist0 && champion.name === finalist0.name} />
-          <div style={{ display: 'flex', alignItems: 'center', padding: '0 6px', color: '#7c3aed', fontSize: 11, fontWeight: 800, flexShrink: 0 }}>vs</div>
+          <div style={{ display: 'flex', alignItems: 'center', padding: '0 5px', color: '#7c3aed', fontSize: 10, fontWeight: 800, flexShrink: 0 }}>vs</div>
           <TeamEntry team={finalist1} isWinner={!!champion && !!finalist1 && champion.name === finalist1.name} />
         </div>
       </div>
@@ -310,12 +306,12 @@ function BracketImage({ picks, userName, predictedOn }: { picks: Picks; userName
         for (let i = 0; i < matchups.length; i += 2) rows.push(matchups.slice(i, i + 2));
 
         return (
-          <div key={label} style={{ marginBottom: 14 }}>
-            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', color: '#475569', marginBottom: 8 }}>
+          <div key={label} style={{ marginBottom: 10 }}>
+            <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', color: '#475569', marginBottom: 5 }}>
               {label}
             </div>
             {rows.map((row, ri) => (
-              <div key={ri} style={{ display: 'flex', gap: 8, marginBottom: 8 }}>
+              <div key={ri} style={{ display: 'flex', gap: 6, marginBottom: 6 }}>
                 {row.map(({ a, b, winner }, ci) => <MatchupCard key={ci} a={a} b={b} winner={winner} />)}
                 {row.length === 1 && <div style={{ flex: '1 1 0' }} />}
               </div>
@@ -324,7 +320,7 @@ function BracketImage({ picks, userName, predictedOn }: { picks: Picks; userName
         );
       })}
 
-      <div style={{ marginTop: 14, textAlign: 'center', fontSize: 10, color: '#1e2a3a' }}>
+      <div style={{ marginTop: 8, textAlign: 'center', fontSize: 9, color: '#1e2a3a' }}>
         worldcup2026.predictions
       </div>
     </div>
@@ -369,7 +365,7 @@ export default function App() {
         );
         const file = new File([blob], filename, { type: 'image/png' });
         if (navigator.canShare({ files: [file] })) {
-          await navigator.share({ files: [file], title: 'My WC 2026 Bracket' });
+          await navigator.share({ files: [file], title: `${userName} World Cup 2026 Prediction` });
           return;
         }
       }
