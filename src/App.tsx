@@ -202,7 +202,6 @@ function BracketImage({ picks, userName, predictedOn }: { picks: Picks; userName
         }}>
           {team?.name ?? 'TBD'}
         </span>
-        {isWinner && <span style={{ fontSize: 8, color: '#22c55e', fontWeight: 700, letterSpacing: 0.5 }}>ADVANCES</span>}
       </div>
     );
   }
@@ -249,7 +248,7 @@ function BracketImage({ picks, userName, predictedOn }: { picks: Picks; userName
     }}>
       {/* Header */}
       <div style={{ marginBottom: 18, paddingBottom: 14, borderBottom: `1px solid ${C.border}` }}>
-        <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: 2, color: C.muted, textTransform: 'uppercase', marginBottom: 6 }}>FIFA World Cup 2026 · Bracket Prediction</div>
+        <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: 2, color: C.muted, textTransform: 'uppercase', marginBottom: 6 }}>FIFA World Cup 2026 · Prediction</div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 12 }}>
           <div style={{ fontSize: 22, fontWeight: 800, color: C.gold }}>{userName}</div>
           <div style={{
@@ -264,26 +263,30 @@ function BracketImage({ picks, userName, predictedOn }: { picks: Picks; userName
       </div>
 
       {/* Round sections with matchup pairs */}
-      {sections.map(({ label, matchups }) => {
-        // const rows: [Team | null, Team | null][][] = [];
-        // for (let i = 0; i < matchups.length; i += 2) rows.push(matchups.slice(i, i + 2) as [Team | null, Team | null][]);
-        type Matchup = { a: Team | null; b: Team | null; winner: Team | null };
-        const rows: Matchup[][] = [];
-        for (let i = 0; i < matchups.length; i += 2) rows.push(matchups.slice(i, i + 2));
-        return (
-          <div key={label} style={{ marginBottom: 14 }}>
-            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', color: '#475569', marginBottom: 8 }}>
-              {label}
+      {/* Champion */}
+      <div style={{ marginBottom: 14 }}>
+        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', color: C.gold, marginBottom: 8 }}>
+          🏆 World Champion
+        </div>
+        {champion ? (
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: 14,
+            background: 'linear-gradient(135deg,#78350f,#b45309,#d97706)',
+            borderRadius: 12, padding: '14px 18px',
+            border: '2px solid #f59e0b',
+          }}>
+            <div>
+              {/* <div style={{ fontSize: 10, fontWeight: 700, color: '#fde68a', letterSpacing: 2, textTransform: 'uppercase' }}>World Champion</div> */}
+              <div style={{ fontSize: 22, fontWeight: 800, color: '#fff' }}>{champion.name}</div>
             </div>
-            {rows.map((row, ri) => (
-              <div key={ri} style={{ display: 'flex', gap: 8, marginBottom: 8 }}>
-                {row.map(({ a, b, winner }, ci) => <MatchupCard key={ci} a={a} b={b} winner={winner} />)}
-                {row.length === 1 && <div style={{ flex: '1 1 0' }} />}
-              </div>
-            ))}
+            <span style={{ fontSize: 32, marginLeft: 'auto' }}>🏆</span>
           </div>
-        );
-      })}
+        ) : (
+          <div style={{ background: '#0d1321', borderRadius: 10, padding: 20, textAlign: 'center', color: C.dim, fontSize: 13 }}>
+            Complete all picks to reveal your champion
+          </div>
+        )}
+      </div>
 
       {/* The Final */}
       <div style={{ marginBottom: 14 }}>
@@ -300,31 +303,26 @@ function BracketImage({ picks, userName, predictedOn }: { picks: Picks; userName
         </div>
       </div>
 
-      {/* Champion */}
-      <div>
-        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', color: C.gold, marginBottom: 8 }}>
-          🏆 World Champion
-        </div>
-        {champion ? (
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: 14,
-            background: 'linear-gradient(135deg,#78350f,#b45309,#d97706)',
-            borderRadius: 12, padding: '14px 18px',
-            border: '2px solid #f59e0b',
-          }}>
+      {/* Semi-Finals, Quarter-Finals, Round of 16 */}
+      {[...sections].reverse().map(({ label, matchups }) => {
+        type Matchup = { a: Team | null; b: Team | null; winner: Team | null };
+        const rows: Matchup[][] = [];
+        for (let i = 0; i < matchups.length; i += 2) rows.push(matchups.slice(i, i + 2));
 
-            <div>
-              <div style={{ fontSize: 10, fontWeight: 700, color: '#fde68a', letterSpacing: 2, textTransform: 'uppercase' }}>World Champion</div>
-              <div style={{ fontSize: 22, fontWeight: 800, color: '#fff' }}>{champion.name}</div>
+        return (
+          <div key={label} style={{ marginBottom: 14 }}>
+            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', color: '#475569', marginBottom: 8 }}>
+              {label}
             </div>
-            <span style={{ fontSize: 32, marginLeft: 'auto' }}>🏆</span>
+            {rows.map((row, ri) => (
+              <div key={ri} style={{ display: 'flex', gap: 8, marginBottom: 8 }}>
+                {row.map(({ a, b, winner }, ci) => <MatchupCard key={ci} a={a} b={b} winner={winner} />)}
+                {row.length === 1 && <div style={{ flex: '1 1 0' }} />}
+              </div>
+            ))}
           </div>
-        ) : (
-          <div style={{ background: '#0d1321', borderRadius: 10, padding: 20, textAlign: 'center', color: C.dim, fontSize: 13 }}>
-            Complete all picks to reveal your champion
-          </div>
-        )}
-      </div>
+        );
+      })}
 
       <div style={{ marginTop: 14, textAlign: 'center', fontSize: 10, color: '#1e2a3a' }}>
         worldcup2026.predictions
@@ -362,8 +360,23 @@ export default function App() {
       const canvas = await html2canvas(summaryRef.current, {
         backgroundColor: C.bg, scale: 2.5, useCORS: true, logging: false,
       });
+      const filename = `${userName}-wc2026-bracket.png`;
+
+      // On mobile, use the Web Share API so the image lands in the Gallery/Photos app.
+      if (navigator.canShare) {
+        const blob = await new Promise<Blob>((resolve, reject) =>
+          canvas.toBlob(b => b ? resolve(b) : reject(new Error('toBlob failed')), 'image/png')
+        );
+        const file = new File([blob], filename, { type: 'image/png' });
+        if (navigator.canShare({ files: [file] })) {
+          await navigator.share({ files: [file], title: 'My WC 2026 Bracket' });
+          return;
+        }
+      }
+
+      // Desktop fallback — anchor download
       const a = document.createElement('a');
-      a.download = `${userName}-wc2026-bracket.png`;
+      a.download = filename;
       a.href = canvas.toDataURL('image/png');
       a.click();
     } finally {
